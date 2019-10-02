@@ -3,7 +3,13 @@ pipeline{
     stages{
         stage('Init'){
             steps{
-                echo "Testing.."
+                sh 'mvn clean package'
+            }
+            post{
+                sucess{
+                    echo 'Now Archiving'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
             }
 
         }
